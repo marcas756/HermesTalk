@@ -22,7 +22,7 @@ So I chose the simple shell-script polling bridge. It is cheap, transparent, eas
 
 ## Project File Overview
 
-
+```
 user@raspberry:~$ tree
 .
 ├── nc_talk
@@ -37,7 +37,7 @@ user@raspberry:~$ tree
 ├── nc_talk_history.txt
 ├── nc_talk_last_id.txt
 └── nc_talk_settings.local.inc
-
+```
 
 
 
