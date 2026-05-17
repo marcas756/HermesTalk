@@ -22,6 +22,25 @@ So I chose the simple shell-script polling bridge. It is cheap, transparent, eas
 
 ## Project File Overview
 
+
+user@raspberry:~$ tree
+.
+├── nc_talk
+│   ├── LICENSE.txt
+│   ├── README.md
+│   ├── nc_hermes_ask.sh
+│   ├── nc_talk_rcv_loop.sh
+│   ├── nc_talk_send.sh
+│   ├── nc_talk_settings.inc
+│   ├── nc_talk_settings.local.inc.template
+│   └── nc_talk_system_prompt.txt
+├── nc_talk_history.txt
+├── nc_talk_last_id.txt
+└── nc_talk_settings.local.inc
+
+
+
+
 | File                                          | Short description                                                                                                                                 |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `nc_talk/README.md`                           | Project documentation with setup, usage, and configuration notes.                                                                                 |
@@ -35,6 +54,9 @@ So I chose the simple shell-script polling bridge. It is cheap, transparent, eas
 | `nc_talk_history.txt`                         | Local conversation history used to give Hermes short-term context between messages.                                                               |
 | `nc_talk_last_id.txt`                         | Stores the last processed Talk message ID so old messages are not handled repeatedly.                                                             |
 | `nc_talk_settings.local.inc`                  | Local private configuration file with real instance-specific values; should not be committed to Git.                                              |
+
+
+
 
 
 ## Setting up `hermes-talk.service`
