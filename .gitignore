@@ -1,0 +1,6 @@
+nc_talk_settings.local.inc
+nc_talk_history.txt
+nc_talk_last_id.txt
+*.local.inc
+*history*.txt
+*.bak
