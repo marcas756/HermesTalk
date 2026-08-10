@@ -4,10 +4,7 @@ set -euo pipefail
 source ./nc_talk_settings.inc
 
 # Create local state files once at loop startup, if they do not already exist
-mkdir -p "$(dirname "$NC_TALK_HISTORY_FILE")"
 mkdir -p "$(dirname "$NC_TALK_LAST_ID_FILE")"
-
-touch "$NC_TALK_HISTORY_FILE"
 
 if [ ! -f "$NC_TALK_LAST_ID_FILE" ]; then
   echo "0" > "$NC_TALK_LAST_ID_FILE"
@@ -53,27 +50,22 @@ while true; do
     ACTOR_NAME=""
   fi
 
-  if [ -n "$MESSAGE" ] && [ "$MESSAGE" != "null" ]; then
-    if [ "${DEBUG_ECHO:-0}" = "1" ]; then
-      echo "Received: $MESSAGE"
+    if [ -n "$MESSAGE" ] && [ "$MESSAGE" != "null" ]; then
+      if [ "${DEBUG_ECHO:-0}" = "1" ]; then
+        echo "Received: $MESSAGE"
+      fi
+      
+      
+      if [ "${DEBUG_ECHO:-0}" = "1" ]; then
+        $NC_TALK_DIR/nc_talk_send.sh "Debug received: $MESSAGE"
+      else
+  
+      ANSWER="$(NC_TALK_BOT_NAME="$NC_USER" $NC_TALK_DIR/nc_hermes_ask.sh "$ACTOR_NAME: $MESSAGE")"
+      
+      TS="$(date '+%Y-%m-%d %H:%M:%S')"
+  
+      $NC_TALK_DIR/nc_talk_send.sh "$ANSWER"
     fi
-    
-    
-    if [ "${DEBUG_ECHO:-0}" = "1" ]; then
-      $NC_TALK_DIR/nc_talk_send.sh "Debug received: $MESSAGE"
-    else
-
-    ANSWER="$(NC_TALK_BOT_NAME="$NC_USER" $NC_TALK_DIR/nc_hermes_ask.sh "$ACTOR_NAME: $MESSAGE")"
-    
-    TS="$(date '+%Y-%m-%d %H:%M:%S')"
-
-    {
-      echo "[$TS] $ACTOR_NAME: $MESSAGE"
-      echo "[$TS] $NC_USER: $ANSWER"   
-    } >> "$NC_TALK_HISTORY_FILE"
-
-    $NC_TALK_DIR/nc_talk_send.sh "$ANSWER"
-  fi
 
 
   fi

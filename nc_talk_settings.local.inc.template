@@ -5,6 +5,3 @@ export TALK_TOKEN="<NEXTCLOUD_TALK_TOKEN>"
 export HERMES_URL="http://127.0.0.1:8642/v1/chat/completions"
 export HERMES_API_KEY="<HERMES_API_KEY_OR_EMPTY>"
 export HERMES_MODEL="hermes-agent"
-export NC_TALK_HISTORY_LINES="250"
-
-
